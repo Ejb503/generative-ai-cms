@@ -64,7 +64,6 @@ export const generateContent = async (
       throw new Error("Failed to generate content");
     }
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);

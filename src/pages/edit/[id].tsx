@@ -140,7 +140,6 @@ export default function EditContent({ id, initialData }: EditProps) {
       );
       if (response.ok) {
         const data = await fetchData(id, selectedPlatform);
-        console.log(data);
         if (data) {
           articleContent[
             selectedPlatform as keyof QuillInstancesType

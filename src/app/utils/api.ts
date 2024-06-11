@@ -1,5 +1,5 @@
 import Delta from "quill-delta";
-import { FETCH_CONTENT_API, SAVE_CONTENT_API } from "../const/api";
+import { FETCH_CONTENT_API, GROQ_API, SAVE_CONTENT_API } from "../const/api";
 
 export const fetchData = async (
   id: string,
@@ -44,6 +44,32 @@ export const saveContent = async (
   }
 };
 
+export const generateContent = async (
+  id: string,
+  title: string,
+  keywords: string,
+  platform: string,
+  content: Delta
+) => {
+  try {
+    const response = await fetch(GROQ_API, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id, title, content, keywords, platform }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to generate content");
+    }
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 export function toTitleCase(str: string) {
   return str.replace(/\w\S*/g, function (txt) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();

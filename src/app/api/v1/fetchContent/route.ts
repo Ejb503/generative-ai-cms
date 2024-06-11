@@ -1,12 +1,13 @@
 import fs from "fs";
 import path from "path";
 import { NextRequest } from "next/server";
+import { CONTENT_DIR } from "@/app/const/api";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const field = searchParams.get("field");
   const id = searchParams.get("id");
-  const dirPath = path.join(process.cwd(), "content", `${id}`);
+  const dirPath = path.join(process.cwd(), CONTENT_DIR, `${id}`);
   const filePath = path.join(dirPath, `${field}.json`);
 
   if (!fs.existsSync(filePath)) {

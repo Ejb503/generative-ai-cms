@@ -1,12 +1,6 @@
-export interface UserPromptParams {
-  title: string;
-  keywords: string[];
-  content: string;
-  platform: string;
-}
+import { SystemPromptParams, UserPromptParams } from "@/app/const/types";
 
-export const GITHUBDESCRIPTION = ``;
-
+export const TWITTERRULES = ``;
 export const TWITTERINSTRUCTIONS = `
 1. **Input Analysis:**
     - Read the provided blog post in its entirety to absorb the content.
@@ -45,20 +39,15 @@ export const TWITTERINSTRUCTIONS = `
   8. Want to know more about machine learning in healthcare? Read our full blog post here: [Link] #MachineLearning #HealthcareInnovation (8/8)
 `;
 
-export const generateSystemPrompt = ({
-  platform,
-  instructions,
-}: {
-  platform: string;
-  instructions: string;
-}) => `
+export const generateSystemPrompt = ({ platform }: SystemPromptParams) => `
     **System Prompt:**
 
     You are an expert social media marketeer tasked with transforming long-form blog entries into concise posts tailored for ${platform}. 
     Your goal is to create professional, engaging, and insightful posts using only the content provided in the blogs. 
 
     **Instructions:**
-    ${instructions}
+    ${TWITTERINSTRUCTIONS}
+
 
     **Required Inputs:**
     1. **Blog Title:** The title of the blog post.
@@ -67,10 +56,9 @@ export const generateSystemPrompt = ({
 
     ---
     **Example Prompt:**
-    **Blog Title:** "AI powered voice chat in June 2024: Lipstick on a pig"
-    **Keywords:** ["ai voice chat, ai voice"]
-    **Blog Content:** 
-    [long-form blog content here]
+    **Blog Title:** "blog title here"
+    **Keywords:** [keyword 1, keyword 2, keyword 3]
+    **Blog Content:** [long-form blog content here]
 `;
 
 export const generateUserPrompt = ({
@@ -81,7 +69,7 @@ export const generateUserPrompt = ({
 }: UserPromptParams) => `
 **User Prompt:**
 
-Transform the following long-form blog content into a concise social media post tailored for ${platform}. The post should be engaging, and insightful. 
+Transform the following long-form blog content into a concise social media post tailored for ${platform}. . 
 
 **Required Inputs:**
 

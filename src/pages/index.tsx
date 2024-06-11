@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import Layout from "@/app/components/layout";
 import { CREATE_CONTENT_API, SCAN_CONTENT_API } from "@/app/const/api";
 import Link from "next/link";
+import { PencilIcon, EyeIcon } from "@heroicons/react/24/solid";
 
 export default function Home() {
   const [folders, setFolders] = useState([]);
   const [folderName, setFolderName] = useState("");
 
-  const fetchFolders = async () => {
+  const scanContent = async () => {
     const response = await fetch(SCAN_CONTENT_API);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -17,7 +18,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetchFolders();
+    scanContent();
   }, []);
 
   const createFolder = async () => {
@@ -29,7 +30,7 @@ export default function Home() {
       body: JSON.stringify({ folderName }),
     });
     setFolderName("");
-    await fetchFolders();
+    await scanContent();
   };
 
   return (
@@ -39,12 +40,23 @@ export default function Home() {
         <h2 className="text-xl font-semibold mb-2">Load content</h2>
         <ul className="list-disc pl-5">
           {folders.map((folder) => (
-            <li key={folder} className="mb-2">
+            <li key={folder} className="mb-4 flex items-center">
+              <span className="text-lg font-medium text-gray-700">
+                {folder}
+              </span>
               <Link
                 href={`/edit/${folder}`}
-                className="text-blue-500 hover:underline"
+                className="ml-4 inline-flex items-center text-blue-500 hover:underline"
               >
-                {folder}
+                <PencilIcon className="h-5 w-5 mr-1" />
+                Edit
+              </Link>
+              <Link
+                href={`/view/${folder}`}
+                className="ml-4 inline-flex items-center text-blue-500 hover:underline"
+              >
+                <EyeIcon className="h-5 w-5 mr-1" />
+                View
               </Link>
             </li>
           ))}

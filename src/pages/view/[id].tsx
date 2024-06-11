@@ -2,20 +2,20 @@ import React, { useEffect, useMemo, useState } from "react";
 import "quill/dist/quill.snow.css";
 import Layout from "@/app/components/layout";
 import "@/app/globals.css";
-import { EDITOPTIONS, PLAINOPTIONS } from "@/app/const/quillSettings";
-import { useQuill } from "@/app/hooks/useQuill";
-import { FIELDS, PLATFORMS } from "@/app/const/api";
 import {
-  fetchData,
-  generateContent,
-  saveContent,
-  toTitleCase,
-} from "@/app/utils/api";
+  EDITOPTIONS,
+  PLAINOPTIONS,
+  VIEWOPTIONS,
+} from "@/app/const/quillSettings";
+import { useQuill } from "@/app/hooks/useQuill";
+import { FIELDS } from "@/app/const/api";
+import { fetchData, toTitleCase } from "@/app/utils/api";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import fs from "fs";
 import path from "path";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import AccordionItem from "@/app/components/accordion-item";
 import { QuillInstancesType } from "@/app/const/types";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -60,12 +60,11 @@ export const getStaticProps: GetStaticProps = async (
   };
 };
 
-interface EditProps {
-  id: string;
+interface ViewProps {
   initialData: { [key: string]: any };
 }
 
-export default function EditContent({ id, initialData }: EditProps) {
+export default function ViewContent({ initialData }: ViewProps) {
   const twitterQuill = useQuill("#twitter", EDITOPTIONS);
   const contentQuill = useQuill("#content", EDITOPTIONS);
   const titleQuill = useQuill("#title", PLAINOPTIONS);
@@ -74,8 +73,6 @@ export default function EditContent({ id, initialData }: EditProps) {
   const githubQuill = useQuill("#github", EDITOPTIONS);
   const redditQuill = useQuill("#reddit", EDITOPTIONS);
   const linkedinQuill = useQuill("#linkedin", EDITOPTIONS);
-
-  const [selectedPlatform, setSelectedPlatform] = useState("twitter");
 
   const articleContent: QuillInstancesType = useMemo(
     () => ({
@@ -99,20 +96,6 @@ export default function EditContent({ id, initialData }: EditProps) {
       linkedinQuill,
     ]
   );
-
-  const handlePlatformChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    setSelectedPlatform(event.target.value);
-  };
-
-  const handleSaveContent = async () => {
-    for (const [field, quill] of Object.entries(articleContent)) {
-      const content = quill.getContents();
-      await saveContent(id, field, content);
-    }
-  };
-
   useEffect(() => {
     Object.keys(articleContent).forEach((key) => {
       const instance = articleContent[key as keyof QuillInstancesType];
@@ -125,79 +108,18 @@ export default function EditContent({ id, initialData }: EditProps) {
     });
   }, [articleContent, initialData]);
 
-  const handleGenerateContent = async () => {
-    if (!selectedPlatform) return;
-    const title = titleQuill.getText();
-    const content = contentQuill.getText();
-    const keywords = keywordsQuill.getText();
-    try {
-      const response = await generateContent(
-        id,
-        title,
-        keywords,
-        selectedPlatform,
-        content
-      );
-      if (response.ok) {
-        const data = await fetchData(id, selectedPlatform);
-        console.log(data);
-        if (data) {
-          articleContent[
-            selectedPlatform as keyof QuillInstancesType
-          ].setContents(data);
-        } else {
-          throw new Error(
-            `Failed to fetch data for platform: ${selectedPlatform}`
-          );
-        }
-      } else {
-        throw new Error(
-          `Failed to generate content for platform: ${selectedPlatform}`
-        );
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
     <Layout>
       <Link className="inline-block mb-4" href="/">
         <ArrowLeftIcon className="h-6 w-6" />
       </Link>
-
-      <h1 className="text-4xl mb-2">Editor</h1>
       {Object.keys(articleContent).map((key) => (
-        <div className="mb-4" key={`${key}-container`}>
-          <h2 className="text-2xl mb-2">{toTitleCase(key)}</h2>
-          <div id={key} />
-        </div>
+        <AccordionItem
+          id={key}
+          key={`${key}-container`}
+          title={toTitleCase(key)}
+        />
       ))}
-      <button
-        onClick={handleSaveContent}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
-      >
-        Save
-      </button>
-      <div className="mb-4">
-        <select
-          value={selectedPlatform}
-          onChange={handlePlatformChange}
-          className="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-        >
-          {PLATFORMS.map((platform) => (
-            <option key={platform} value={platform}>
-              Generate for {platform}
-            </option>
-          ))}
-        </select>
-      </div>
-      <button
-        onClick={handleGenerateContent}
-        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Generate Content
-      </button>
     </Layout>
   );
 }

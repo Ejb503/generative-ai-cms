@@ -1,39 +1,55 @@
 import { NextRequest } from "next/server";
-import {
-  generateUserPrompt,
-  generateSystemPrompt,
-  TWITTERINSTRUCTIONS,
-} from "./prompt";
 import Delta from "quill-delta";
 import fs from "fs";
 import path from "path";
+import { githubPrompts } from "@/prompts/github";
+import { redditPrompts } from "@/prompts/reddit";
+import { blogPrompts } from "@/prompts/blog";
+import { linkedinPrompts } from "@/prompts/linkedin";
+
+import {
+  PromptGenerators,
+  SystemPromptParams,
+  UserPromptParams,
+} from "@/app/const/types";
 
 const Groq = require("groq-sdk");
 
+const platformPrompts: Record<string, PromptGenerators> = {
+  github: githubPrompts,
+  reddit: redditPrompts,
+  blog: blogPrompts,
+  linkedin: linkedinPrompts,
+};
 export async function POST(req: NextRequest) {
-  const controller = new AbortController();
-
   try {
     const { id, title, content, keywords, platform } = await req.json();
+    const systemPromptParams: SystemPromptParams = {
+      platform,
+    };
+    const userPromptParams: UserPromptParams = {
+      title,
+      keywords,
+      content,
+      platform,
+    };
+    const systemPrompt =
+      platformPrompts[platform].generateSystemPrompt(systemPromptParams);
+    const userPrompt =
+      platformPrompts[platform].generateUserPrompt(userPromptParams);
     const groq = new Groq({
       apiKey: process.env.GROQ_API_KEY,
     });
-    const instructions = TWITTERINSTRUCTIONS;
 
     const result = await groq.chat.completions.create({
       messages: [
         {
           role: "system",
-          content: generateSystemPrompt({ platform, instructions }),
+          content: systemPrompt,
         },
         {
           role: "user",
-          content: generateUserPrompt({
-            title,
-            content,
-            keywords,
-            platform,
-          }),
+          content: userPrompt,
         },
       ],
       model: "llama3-8b-8192",
@@ -64,7 +80,5 @@ export async function POST(req: NextRequest) {
         "Content-Type": "application/json",
       },
     });
-  } finally {
-    controller.abort();
   }
 }

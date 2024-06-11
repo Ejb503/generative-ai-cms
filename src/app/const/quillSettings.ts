@@ -27,4 +27,10 @@ export const PLAINOPTIONS = {
   theme: "snow",
 };
 
-export const PLATFORMS = ["twitter"];
+export const VIEWOPTIONS = {
+  modules: {
+    toolbar: false,
+  },
+  theme: "snow",
+  readOnly: true,
+};

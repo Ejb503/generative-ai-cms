@@ -1,3 +1,4 @@
+import { CONTENT_DIR } from "@/app/const/api";
 import fs from "fs";
 import path from "path";
 import util from "util";
@@ -6,7 +7,7 @@ const readdir = util.promisify(fs.readdir);
 const stat = util.promisify(fs.stat);
 
 async function getDirectories(): Promise<string[]> {
-  const filePath = path.resolve("content");
+  const filePath = path.resolve(CONTENT_DIR);
   try {
     const filesAndDirectories = await readdir(filePath);
     const directoryCheckPromises = filesAndDirectories.map(async (file) => {

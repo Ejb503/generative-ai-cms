@@ -22,7 +22,8 @@
       "@/*": ["./*"],
       "@context/*": ["./app/context/*"],
       "@api/*": ["./app/api/*"],
-      "@components/*": ["./app/components/*"]
+      "@prompts/*": ["./prompts*"],
+      "@content/*": ["./content/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

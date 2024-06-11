@@ -1,3 +1,4 @@
+import { CONTENT_DIR } from "@/app/const/api";
 import fs from "fs";
 import { NextRequest } from "next/server";
 import path from "path";
@@ -6,7 +7,7 @@ import util from "util";
 const mkdir = util.promisify(fs.mkdir);
 
 async function createDirectory(folderName: string): Promise<boolean> {
-  const filePath = path.resolve("content", folderName);
+  const filePath = path.resolve(CONTENT_DIR, folderName);
   try {
     await mkdir(filePath);
     return true;

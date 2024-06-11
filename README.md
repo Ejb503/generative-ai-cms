@@ -1,1 +1,75 @@
-**Transformed GitHub Repository**\n\n# Generative AI: Cracking nuts with a sledgehammer\n\n**Overview**\n\nAre you using Generative AI the wrong way? Stop cracking nuts with a sledgehammer! In this blog post, we'll explore the consequences of relying on AI to replace expertise and creativity. Discover how to wield Generative AI to amplify your skills, not replace them.\n\n**Blog Summary**\n\nThe \"trough of disillusionment\" has arrived, as many are misusing Generative AI. Instead of recognizing its limitations, people assume AI will solve complex problems. However, Generative AI is only capable of performing enormous amounts of work to an intermediate level. We'll debunk myths and explore the importance of expertise in the era of AI.\n\n**Tech Stack**\n\n* Blog Title: \"Cracking nuts with a sledgehammer\"\n* Keywords: ai algorithms, artificial intelligence ai, generative ai programs\n* Blog Content: Long-form blog post on the misuse of Generative AI and its limitations.\n\n**How to Use**\n\n1. Read the blog post to understand the importance of expertise in AI-driven age.\n2. Learn the difference between using AI to amplify your skills and replacing expertise.\n3. Apply the insights to your own work and projects to avoid the pitfalls of AI misuse.\n\n**What Not to Do**\n\n* **Don't** use AI to replace human creativity and expertise.\n* **Don't** assume AI can solve complex problems without human input.\n* **Don't** rely solely on AI for quality output.\n\n**Get Involved**\n\nJoin the discussion and share your thoughts on the role of Generative AI in our lives.\n\n** References**\n\n* [Blog Post] (README.md)\n* [YouTube Video] (README.md)\n\* [Blog Comments] (README.md)\n\n**What's Next?**\n\nStay tuned for more insights on the intersection of AI and human expertise.
+# Locally hosted AI CMS with Quill
+
+<img src="https://tyingshoelaces.com/logo.png" alt="logo" width="100"/> [![License](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/licenses/MIT) [![Contributors](https://img.shields.io/badge/contributors-1-orange)](https://github.com/Ejb503)
+
+A locally hosted CMS that writes and reads content to JSON using Quill. Integrated with Groq to leverage content generation at scale and publish content in different media channels and formats. Read more in the blog: [Tying Shoelaces](https://tyingshoelaces.com/blog/generative-ai-cms)
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Architecture](#architecture)
+
+## Features
+
+- 🎨 **Feature One**: Read/Write content using Quill
+- 🚀 **Feature Two**: Generate content via Groq
+- 🔒 **Feature Three**: Locally hosted CMS
+- 🛠 **Feature Four**: All typescript through NextJS
+
+## Installation
+
+- add GROQ_API_KEY to .env.local.
+- mkdir content
+- npm i
+- npm run dev
+
+### Steps to Install
+
+1. Clone the repository:
+
+```sh
+git clone https://github.com/Ejb503/generative-ai-cms
+```
+
+2. Change to the project directory:
+
+```sh
+cd generative-ai-cms
+```
+
+3. Install dependencies:
+
+```sh
+npm install
+```
+
+4. Set up environment variables
+
+```sh
+cp .env.example .local.env
+```
+
+## Usage
+
+```sh
+npm run dev
+```
+
+## Architecture
+
+Here's an overview of the project's architecture and how the components interact with each other.
+
+```plaintext
+|-- src/
+| |-- app/
+| |-- pages/
+| |-- prompts/
+|-- public/
+|-- content/
+```
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.

@@ -18,62 +18,69 @@ const GITHUBINSTRUCTIONS = `
 
 ### Example GitHub Repository Description:
 
-# AI Powered Voice Chat Demo
+# Locally hosted AI CMS with Quill
 
-## Overview
+<img src="https://tyingshoelaces.com/logo.png" alt="logo" width="100"/> [![License](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/licenses/MIT) [![Contributors](https://img.shields.io/badge/contributors-1-orange)](https://github.com/Ejb503)
 
-I’ve built a simple version of OpenAI's voice functionality using free APIs. This demo lets you talk, listen, and converse with LLMs. Original blog post is here:
+A locally hosted CMS that writes and reads content to JSON using Quill. Integrated with Groq to leverage content generation at scale and publish content in different media channels and formats. Read more in the blog: [Tying Shoelaces](https://tyingshoelaces.com/blog/generative-ai-cms)
 
-- **Blog:** [Blog Post](https://tyingshoelaces.com/blog/ai-voice-generation)
-  Youtube video is here: [YouTube Video](https://youtu.be/3zPeOpOEmyQ)
+## Table of Contents
 
-Feel free to play around and tell me what you think!
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Architecture](#architecture)
 
-## Tech Stack
+## Features
 
-- **LLM Host:** Groq
-- **LLM:** LLAMA 3
-- **TTS:** DeepGram
-- **STT:** SpeechRecognition API
-- **Web Framework:** NextJS (React front-end, Express API)
+- 🎨 **Feature One**: Read/Write content using Quill
+- 🚀 **Feature Two**: Generate content via Groq
+- 🔒 **Feature Three**: Locally hosted CMS
+- 🛠 **Feature Four**: All typescript through NextJS
 
-## How to use
+## Installation
 
-1. download the repo
-2. npm i
-3. setup .env.local with DEEPGRAM_API_KEY and GROQ_API_KEY
-4. npm run dev
+- add GROQ_API_KEY to .env.local.
+- mkdir content
+- npm i
+- npm run dev
 
-## Hints and tricks
+### Steps to Install
 
-You'll probably want to switch out SpeechRecognition for Whisper AI if you want non-chrome / more stable
-There is a lot of investment needed in handling state in the AudioPlayer, not necessary for this demo
-Playing with the prompts and context going to Groq is the key for personalisation
-Contact me for feedback!
+1. Clone the repository:
 
-## What I Did
+git clone https://github.com/Ejb503/generative-ai-cms
 
-I built a demo where you can:
+2. Change to the project directory:
 
-1. Talk into the browser using the WebSpeechRecognitionAPI.
-2. Stream the transcribed text to Groq for processing.
-3. Stream the response from Groq to DeepGram for text-to-speech conversion.
-4. Play the generated audio response in the browser.
+cd generative-ai-cms
 
-- **NextJS:** ★★★★★ - Wonderful technology, simplifies client and server-side development.
-- **Groq:** ★★★★★ - New benchmarks in speed and cost.
-- **Llama3:** ★★★★☆ - Noticeable difference from GPT-io, great for cheap requests and demos.
-- **DeepGram:** ★★★☆☆ - Generous starting credits, good latency. Still green as a tech.
+3. Install dependencies:
 
-## Links
+npm install
 
-- **Demo:** [AI Voice Generation Demo](https://tyingshoelaces.com/demo/ai-voice-generation)
-- **GitHub Repository:** [GitHub](https://github.com/Ejb503/ai-voice-generation)
-- **Video:** [YouTube Video](https://youtu.be/3zPeOpOEmyQ)
-- **Blog:** [Blog Post](https://tyingshoelaces.com/blog/ai-voice-generation)
+4. Set up environment variables
 
----
-Edward Ejb503, [Tying Shoelaces Blog](https://tyingshoelaces.com)
+cp .env.example .local.env
+
+## Usage
+
+npm run dev
+
+## Architecture
+
+Here's an overview of the project's architecture and how the components interact with each other.
+
+plaintext
+|-- src/
+| |-- app/
+| |-- pages/
+| |-- prompts/
+|-- public/
+|-- content/
+
+## License
+Distributed under the MIT License. See LICENSE for more information.
 `;
 
 const generateSystemPrompt = ({ platform }: SystemPromptParams) => `

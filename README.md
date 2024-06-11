@@ -1,6 +1,8 @@
-# Locally hosted AI CMS with Quill
+# Generative AI CMS with Quill
 
-<img src="https://tyingshoelaces.com/logo.png" alt="logo" width="100"/> [![License](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/licenses/MIT) [![Contributors](https://img.shields.io/badge/contributors-1-orange)](https://github.com/Ejb503)
+<img src="https://tyingshoelaces.com/_next/image?url=https%3A%2F%2Ftyingshoelaces.com%2Fcrackingnutssledgehammer.jpg&w=3840&q=75" alt="logo" width="360"/> By tyingshoelaces.com
+
+[![License](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/licenses/MIT) [![Contributors](https://img.shields.io/badge/contributors-1-orange)](https://github.com/Ejb503)
 
 A locally hosted CMS that writes and reads content to JSON using Quill. Integrated with Groq to leverage content generation at scale and publish content in different media channels and formats. Read more in the blog: [Tying Shoelaces](https://tyingshoelaces.com/blog/generative-ai-cms)
 

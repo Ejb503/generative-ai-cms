@@ -1,6 +1,6 @@
-# Generative AI CMS with Quill
+# Locally hosted CMS with Quill and Generative AI features
 
-<img src="https://tyingshoelaces.com/_next/image?url=https%3A%2F%2Ftyingshoelaces.com%2Fcrackingnutssledgehammer.jpg&w=3840&q=75" alt="logo" width="360"/> By tyingshoelaces.com
+<img src="https://tyingshoelaces.com/_next/image?url=https%3A%2F%2Ftyingshoelaces.com%2Fcrackingnutssledgehammer.jpg&w=3840&q=75" alt="logo" width="360"/> By [tyingshoelaces.com](https://tyingshoelaces.com)
 
 [![License](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/licenses/MIT) [![Contributors](https://img.shields.io/badge/contributors-1-orange)](https://github.com/Ejb503)
 
@@ -15,10 +15,13 @@ A locally hosted CMS that writes and reads content to JSON using Quill. Integrat
 
 ## Features
 
-- 🎨 **Feature One**: Read/Write content using Quill
-- 🚀 **Feature Two**: Generate content via Groq
-- 🔒 **Feature Three**: Locally hosted CMS
-- 🛠 **Feature Four**: All typescript through NextJS
+1. Read / Write local content to JSON using Quill
+2. NextJS for interactive frontend and API integrated into Groq (API key required)
+3. Content augmentation generating social media specific bites from long form content
+
+- **Groq:** ★★★★★ - New benchmarks in speed and cost for generative AI.
+- **Quill:** ★★★★★ - Locally hosted content editor. Does the job, nice experience if tricky to get setup with SSR.
+- **NextJS:** ★★★★★ - Wonderful technology, simplifies client and server-side development.
 
 ## Installation
 

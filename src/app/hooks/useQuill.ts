@@ -9,12 +9,17 @@ if (typeof window !== "undefined") {
 
 type QuillInstance = typeof Quill | null;
 
-export const useQuill = (selector: string, options: any): QuillInstance => {
+export const useQuill = (
+  selector: string,
+  options: any,
+  setContentChanged: React.Dispatch<React.SetStateAction<boolean>>
+): QuillInstance => {
   const [quill, setQuillInstance] = useState<QuillInstance>(null);
 
   useEffect(() => {
     if (Quill !== null) {
       const quillInstance = new Quill(selector, options);
+      quillInstance.on("text-change", () => setContentChanged(true));
       setQuillInstance(quillInstance);
     }
   }, [selector, options]);

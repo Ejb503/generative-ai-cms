@@ -4,7 +4,10 @@
 
 [![License](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/licenses/MIT) [![Contributors](https://img.shields.io/badge/contributors-1-orange)](https://github.com/Ejb503)
 
-A locally hosted CMS that writes and reads content to JSON using Quill. Integrated with Groq to leverage content generation at scale and publish content in different media channels and formats. Read more in the blog: [Tying Shoelaces](https://tyingshoelaces.com/blog/generative-ai-cms)
+A basic starter repo for locally hosted CMS that writes and reads content to JSON using Quill. Integrated with Groq to leverage content generation at scale and publish content in different media channels and formats.
+
+Read more in the blog: [Tying Shoelaces](https://tyingshoelaces.com/blog/generative-ai-cms)
+Video introduction: [YouTube](https://www.youtube.com/watch?v=Xc01ovkcAEc&t=21s)
 
 ## Table of Contents
 

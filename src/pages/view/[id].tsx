@@ -17,6 +17,7 @@ import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import AccordionItem from "@/app/components/accordion-item";
 import { QuillInstancesType } from "@/app/const/types";
+import Quill from "quill";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const contentDirectory = path.join(process.cwd(), "content");
@@ -65,14 +66,39 @@ interface ViewProps {
 }
 
 export default function ViewContent({ initialData }: ViewProps) {
-  const twitterQuill = useQuill("#twitter", EDITOPTIONS);
-  const contentQuill = useQuill("#content", EDITOPTIONS);
-  const titleQuill = useQuill("#title", PLAINOPTIONS);
-  const keywordsQuill = useQuill("#keywords", PLAINOPTIONS);
-  const blogQuill = useQuill("#blog", EDITOPTIONS);
-  const githubQuill = useQuill("#github", EDITOPTIONS);
-  const redditQuill = useQuill("#reddit", EDITOPTIONS);
-  const linkedinQuill = useQuill("#linkedin", EDITOPTIONS);
+  const [contentChanged, setContentChanged] = useState(false);
+  const twitterQuill: Quill = useQuill(
+    "#twitter",
+    EDITOPTIONS,
+    setContentChanged
+  );
+  const contentQuill: Quill = useQuill(
+    "#content",
+    EDITOPTIONS,
+    setContentChanged
+  );
+  const titleQuill: Quill = useQuill("#title", PLAINOPTIONS, setContentChanged);
+  const keywordsQuill: Quill = useQuill(
+    "#keywords",
+    PLAINOPTIONS,
+    setContentChanged
+  );
+  const blogQuill: Quill = useQuill("#blog", EDITOPTIONS, setContentChanged);
+  const githubQuill: Quill = useQuill(
+    "#github",
+    EDITOPTIONS,
+    setContentChanged
+  );
+  const redditQuill: Quill = useQuill(
+    "#reddit",
+    EDITOPTIONS,
+    setContentChanged
+  );
+  const linkedinQuill: Quill = useQuill(
+    "#linkedin",
+    EDITOPTIONS,
+    setContentChanged
+  );
 
   const articleContent: QuillInstancesType = useMemo(
     () => ({
@@ -113,6 +139,13 @@ export default function ViewContent({ initialData }: ViewProps) {
       <Link className="inline-block mb-4" href="/">
         <ArrowLeftIcon className="h-6 w-6" />
       </Link>
+      {contentChanged && (
+        <div className="bg-yellow-200 p-4 mb-4">
+          <p className="text-yellow-700">
+            Content has changed. Don&apos;t forget to save!{" "}
+          </p>
+        </div>
+      )}
       {Object.keys(articleContent).map((key) => (
         <AccordionItem
           id={key}

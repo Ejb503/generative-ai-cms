@@ -6,6 +6,7 @@ import { githubPrompts } from "@/prompts/github";
 import { redditPrompts } from "@/prompts/reddit";
 import { blogPrompts } from "@/prompts/blog";
 import { linkedinPrompts } from "@/prompts/linkedin";
+import { twitterPrompts } from "@/prompts/twitter";
 
 import {
   PromptGenerators,
@@ -14,13 +15,14 @@ import {
 } from "@/app/const/types";
 
 const Groq = require("groq-sdk");
-
 const platformPrompts: Record<string, PromptGenerators> = {
   github: githubPrompts,
   reddit: redditPrompts,
   blog: blogPrompts,
   linkedin: linkedinPrompts,
+  twitter: twitterPrompts,
 };
+
 export async function POST(req: NextRequest) {
   try {
     const { id, title, content, keywords, platform } = await req.json();

@@ -77,3 +77,8 @@ Transform the following long-form blog content into a concise social media post 
 - **Keywords:** ${keywords}
 - **Blog Content:** /n ${content} /n
 `;
+
+export const twitterPrompts = {
+  generateSystemPrompt,
+  generateUserPrompt,
+};

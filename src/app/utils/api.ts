@@ -49,7 +49,7 @@ export const generateContent = async (
   title: string,
   keywords: string,
   platform: string,
-  content: Delta
+  content: string
 ) => {
   try {
     const response = await fetch(GROQ_API, {
